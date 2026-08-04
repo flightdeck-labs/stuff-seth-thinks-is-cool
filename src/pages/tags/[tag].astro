@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LinkCard from '../../components/LinkCard.astro';
+
+export async function getStaticPaths() {
+  const links = await getCollection('links');
+  const tags = [...new Set(links.flatMap((link) => link.data.tags))].sort();
+  return tags.map((tag) => ({ params: { tag }, props: { tag } }));
+}
+
+const { tag } = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const links = (await getCollection('links')).filter((link) => link.data.tags.includes(tag)).sort((a, b) => new Date(b.data.proposed_at).getTime() - new Date(a.data.proposed_at).getTime());
+---
+<BaseLayout title={`#${tag} - Stuff Seth Thinks Is Cool`}>
+  <p><a href={base}>← All links</a></p>
+  <h2>#{tag}</h2>
+  {links.map((link) => <LinkCard link={link} />)}
+</BaseLayout>
