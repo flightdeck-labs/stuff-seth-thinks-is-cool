@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props { link: CollectionEntry<'links'>; }
+
+const { link } = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const date = new Date(link.data.proposed_at);
+function tagHref(tag: string) { return `${base}tags/${encodeURIComponent(tag)}/`; }
+---
+<article class="link-card">
+  <div class="meta">
+    <span>{link.data.domain}</span><span aria-hidden="true">•</span>
+    <time datetime={link.data.proposed_at}>{date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
+    <span class="status">{link.data.status}</span>
+  </div>
+  <h2><a href={link.data.url}>{link.data.title}</a></h2>
+  <p>{link.data.summary}</p>
+  {link.data.tags.length > 0 && (
+    <ul class="tags" aria-label="Tags">
+      {link.data.tags.map((tag) => <li><a href={tagHref(tag)}>#{tag}</a></li>)}
+    </ul>
+  )}
+</article>
+<style>
+  .link-card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; box-shadow: 0 10px 30px rgb(0 0 0 / 0.05); }
+  .link-card + .link-card { margin-top: 18px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: 0.9rem; }
+  h2 { margin: 8px 0; }
+  h2 a { color: inherit; text-decoration-thickness: 0.08em; }
+  p { margin-bottom: 0; }
+  .status { border: 1px solid var(--line); border-radius: 999px; padding: 0 8px; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.08em; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 16px 0 0; padding: 0; }
+  .tags a { border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; text-decoration: none; }
+</style>

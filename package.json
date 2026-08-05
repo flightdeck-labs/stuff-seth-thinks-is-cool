@@ -1,0 +1,30 @@
+{
+  "name": "stuff-seth-thinks-is-cool",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "description": "Selected software-development links Seth thinks are cool, curated with Goose.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "test": "vitest run",
+    "collect:raindrop": "tsx scripts/collect-raindrop.ts",
+    "dedupe:link": "tsx scripts/dedupe-links.ts",
+    "daily-pr": "tsx scripts/daily-pr.ts"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.12",
+    "astro": "^5.13.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@types/node": "^24.0.0",
+    "tsx": "latest",
+    "typescript": "^5.9.0",
+    "vitest": "latest"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

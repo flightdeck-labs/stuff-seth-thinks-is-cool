@@ -1,0 +1,13 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LinkCard from '../components/LinkCard.astro';
+
+const links = (await getCollection('links')).sort((a, b) => new Date(b.data.proposed_at).getTime() - new Date(a.data.proposed_at).getTime());
+---
+<BaseLayout title="Stuff Seth Thinks Is Cool">
+  <section aria-labelledby="latest-links">
+    <h2 id="latest-links">Latest proposed links</h2>
+    {links.length === 0 ? <p>No links yet.</p> : links.map((link) => <LinkCard link={link} />)}
+  </section>
+</BaseLayout>
