@@ -13,7 +13,7 @@ const links = defineCollection({
     tags: z.array(z.string()).default([]),
     summary: z.string(),
     status: z.enum(['proposed', 'published']).default('proposed'),
-    source: z.enum(['raindrop', 'manual']).default('raindrop')
+    source: z.enum(['raindrop', 'obsidian-vault-raindrop', 'manual']).default('raindrop')
   })
 });
 
