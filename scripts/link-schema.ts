@@ -1,5 +1,5 @@
 export type LinkStatus = 'proposed' | 'published';
-export type LinkSource = 'raindrop' | 'manual';
+export type LinkSource = 'raindrop' | 'obsidian-vault-raindrop' | 'manual';
 
 export interface LinkInput {
   title: string;
@@ -32,7 +32,7 @@ export function validateLinkInput(input: LinkInput): ValidatedLinkInput {
   const status = input.status ?? 'proposed';
   if (status !== 'proposed' && status !== 'published') throw new Error(`Invalid status: ${status}`);
   const source = input.source ?? 'raindrop';
-  if (source !== 'raindrop' && source !== 'manual') throw new Error(`Invalid source: ${source}`);
+  if (source !== 'raindrop' && source !== 'obsidian-vault-raindrop' && source !== 'manual') throw new Error(`Invalid source: ${source}`);
   return {
     title: input.title.trim(),
     url: parsed.toString(),
