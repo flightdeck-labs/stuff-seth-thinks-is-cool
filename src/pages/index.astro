@@ -7,7 +7,10 @@ const links = (await getCollection('links')).sort((a, b) => new Date(b.data.prop
 ---
 <BaseLayout title="Stuff Seth Thinks Is Cool">
   <section aria-labelledby="latest-links">
-    <h2 id="latest-links">Latest proposed links</h2>
+    <div class="section-heading">
+      <h2 id="latest-links">Latest proposed links</h2>
+      <p class="section-kicker">Carrier deck queue</p>
+    </div>
     {links.length === 0 ? <p>No links yet.</p> : links.map((link) => <LinkCard link={link} />)}
   </section>
 </BaseLayout>
