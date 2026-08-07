@@ -13,7 +13,6 @@ function tagHref(tag: string) { return `${base}tags/${encodeURIComponent(tag)}/`
     <span class="domain">{link.data.domain}</span>
     <span aria-hidden="true">•</span>
     <time datetime={link.data.proposed_at}>{date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
-    <span class="status">{link.data.status}</span>
   </div>
   <h2><a href={link.data.url}>{link.data.title}</a></h2>
   <p>{link.data.summary}</p>
@@ -94,18 +93,6 @@ function tagHref(tag: string) { return `${base}tags/${encodeURIComponent(tag)}/`
     color: #2e3a48;
     font-size: 1.02rem;
     overflow-wrap: anywhere;
-  }
-
-  .status {
-    border: 1px solid rgb(193 18 31 / 0.24);
-    border-radius: 999px;
-    padding: 1px 9px;
-    background: rgb(193 18 31 / 0.08);
-    color: var(--afterburner-red);
-    text-transform: uppercase;
-    font-size: 0.72rem;
-    font-weight: 900;
-    letter-spacing: 0.09em;
   }
 
   .tags {
