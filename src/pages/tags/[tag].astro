@@ -15,6 +15,9 @@ const links = (await getCollection('links')).filter((link) => link.data.tags.inc
 ---
 <BaseLayout title={`#${tag} - Stuff Seth Thinks Is Cool`}>
   <p><a href={base}>← All links</a></p>
-  <h2>#{tag}</h2>
+  <div class="section-heading">
+    <h2>#{tag}</h2>
+    <p class="section-kicker">Tagged flight path</p>
+  </div>
   {links.map((link) => <LinkCard link={link} />)}
 </BaseLayout>

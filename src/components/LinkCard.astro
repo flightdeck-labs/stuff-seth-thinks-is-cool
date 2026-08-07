@@ -10,7 +10,8 @@ function tagHref(tag: string) { return `${base}tags/${encodeURIComponent(tag)}/`
 ---
 <article class="link-card">
   <div class="meta">
-    <span>{link.data.domain}</span><span aria-hidden="true">•</span>
+    <span class="domain">{link.data.domain}</span>
+    <span aria-hidden="true">•</span>
     <time datetime={link.data.proposed_at}>{date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
     <span class="status">{link.data.status}</span>
   </div>
@@ -23,13 +24,126 @@ function tagHref(tag: string) { return `${base}tags/${encodeURIComponent(tag)}/`
   )}
 </article>
 <style>
-  .link-card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; box-shadow: 0 10px 30px rgb(0 0 0 / 0.05); }
+  .link-card {
+    position: relative;
+    overflow: hidden;
+    background:
+      linear-gradient(90deg, rgb(193 18 31 / 0.08), transparent 34%),
+      var(--card);
+    border: 1px solid var(--line);
+    border-left: 7px solid var(--afterburner-red);
+    border-radius: var(--radius-md);
+    max-width: 100%;
+    padding: clamp(20px, 4vw, 28px);
+    box-shadow: 0 12px 34px rgb(7 26 47 / 0.08);
+  }
+
+  .link-card::after {
+    content: "";
+    position: absolute;
+    top: 18px;
+    right: -52px;
+    width: 150px;
+    height: 150px;
+    border: 18px solid rgb(95 111 58 / 0.09);
+    border-radius: 50%;
+  }
+
   .link-card + .link-card { margin-top: 18px; }
-  .meta { display: flex; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: 0.9rem; }
-  h2 { margin: 8px 0; }
-  h2 a { color: inherit; text-decoration-thickness: 0.08em; }
-  p { margin-bottom: 0; }
-  .status { border: 1px solid var(--line); border-radius: 999px; padding: 0 8px; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.08em; }
-  .tags { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 16px 0 0; padding: 0; }
-  .tags a { border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; text-decoration: none; }
+
+  .meta {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  .domain {
+    color: var(--flight-suit-olive);
+    font-weight: 900;
+    overflow-wrap: anywhere;
+  }
+
+  h2 {
+    position: relative;
+    z-index: 1;
+    margin: 10px 0;
+    font-size: clamp(1.35rem, 3.5vw, 2rem);
+  }
+
+  h2 a {
+    display: block;
+    color: var(--midnight-navy);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  h2 a:hover { color: var(--afterburner-red); }
+
+  p {
+    position: relative;
+    z-index: 1;
+    max-width: 72ch;
+    margin-bottom: 0;
+    color: #2e3a48;
+    font-size: 1.02rem;
+    overflow-wrap: anywhere;
+  }
+
+  .status {
+    border: 1px solid rgb(193 18 31 / 0.24);
+    border-radius: 999px;
+    padding: 1px 9px;
+    background: rgb(193 18 31 / 0.08);
+    color: var(--afterburner-red);
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.09em;
+  }
+
+  .tags {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-width: 100%;
+    list-style: none;
+    margin: 18px 0 0;
+    padding: 0;
+  }
+
+  .tags li {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .tags a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    max-width: 100%;
+    border: 1px solid rgb(7 26 47 / 0.13);
+    border-radius: 999px;
+    padding: 4px 11px;
+    background: rgb(247 244 234 / 0.78);
+    color: var(--midnight-navy);
+    font-size: 0.88rem;
+    font-weight: 800;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+
+  .tags a:hover {
+    border-color: rgb(95 111 58 / 0.45);
+    background: rgb(95 111 58 / 0.12);
+    color: var(--flight-suit-olive);
+  }
 </style>
