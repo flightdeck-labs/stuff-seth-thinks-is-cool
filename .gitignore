@@ -1,5 +1,6 @@
 node_modules/
 dist/
+pages-redirect-publish/
 .astro/
 .DS_Store
 .env

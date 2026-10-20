@@ -4,7 +4,7 @@ Selected software-development links Seth finds interesting, curated with Goose.
 
 ## What this is
 
-Raindrop is the capture inbox. Goose proposes concise notes for links that look relevant to software development. The repo stores those proposed links as Markdown, Astro builds the site, and GitHub Pages publishes it after Seth merges a review PR.
+Raindrop is the capture inbox. Goose proposes concise notes for links that look relevant to software development. The repo stores those proposed links as Markdown. The public collection is https://shr.dev/cool; GitHub Pages on this repo only redirects there.
 
 ## Local development
 
@@ -71,7 +71,7 @@ pnpm daily-pr -- --date 2026-08-03
 2. Goose commits proposed Markdown link entries.
 3. The daily PR helper opens a PR if the branch has changes.
 4. Seth reviews and merges.
-5. GitHub Pages deploys `main`.
+5. GitHub Pages deploys a redirect stub from `main` (the live collection is https://shr.dev/cool). GitHub Pages cannot send a real HTTP 302, so the stub uses a meta refresh plus `location.replace`.
 
 See [`docs/architecture.md`](docs/architecture.md) and [`docs/hermes-workflow.md`](docs/hermes-workflow.md) for details.
 
