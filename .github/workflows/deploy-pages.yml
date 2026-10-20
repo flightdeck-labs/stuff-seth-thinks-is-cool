@@ -36,12 +36,17 @@ jobs:
           enablement: true
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      # Keep the Astro build so Goose/Raindrop PRs still fail on invalid Markdown.
+      # Do not upload `dist`: the public site moved to https://shr.dev/cool.
       - name: Build
         run: pnpm build
+      - name: Prepare redirect Pages artifact
+        run: bash scripts/prepare-pages-redirect.sh
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: dist
+          # GitHub Pages cannot emit HTTP 302/301. This stub is meta-refresh + JS.
+          path: pages-redirect-publish
 
   deploy:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
